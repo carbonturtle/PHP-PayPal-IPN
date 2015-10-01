@@ -1,11 +1,11 @@
 PHP-PayPal-IPN
 ==============
 
-**WARNING:** Version 2.5.1+ has a different namespace! It is now `wadeshuler\paypalipn`!
+**WARNING:** Version 2.5.1+ has a different namespace! It is now `WadeShuler\PhpPaypalIpn`!
 
 Forked from: https://github.com/Quixotix/PHP-PayPal-IPN/
 
-Forked from the great Quixotix PayPal IPN script, which is no longer maintained. From now on, you should use this repo instead, as I have adddressed it's issues and brought it back to life.
+Forked from the great Quixotix PayPal IPN script, which is no longer maintained. From now on, you should use this repo instead, as I have adddressed its issues and brought it back to life.
 
 This fork fixes the known issues with the original repo, as well as updates the code according to PayPal's documentation, and today's standards.
 
@@ -45,7 +45,7 @@ composer.json
     }
 
 
-    use wadeshuler\paypalipn\IpnListener;
+    use WadeShuler\PhpPaypalIpn\IpnListener;
     $listener = new IpnListener();
 
     // default options
@@ -104,7 +104,7 @@ below. For a more thoroughly documented example, take a look at the
 
     require_once('vendor/autoload.php');
 
-    $listener = new \wadeshuler\paypalipn\IpnListener();
+    $listener = new WadeShuler\PhpPaypalIpn\IpnListener();
     $listener->use_sandbox = true;
 
     if ($verified = $listener->processIpn())
