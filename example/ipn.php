@@ -17,7 +17,9 @@
  */
 
 // include the IPNListener Class
-require_once( dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'IPNListener.php');
+require_once( dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'IpnListener.php');
+
+use WadeShuler\PhpPaypalIpn\IpnListener;
 
 $listener = new IpnListener();      // NOTICE new upper-casing of the class name
 $listener->use_sandbox = true;      // Only needed for testing (sandbox), else omit or set false
@@ -36,12 +38,16 @@ if ($verified = $listener->processIpn())
     */
     $transactionRawData = $listener->getRawPostData();      // raw data from PHP input stream
     $transactionData = $listener->getPostData();            // POST data array
+    
+//	NOTICE webserver must be able to write to ipn_success.log
     file_put_contents('ipn_success.log', print_r($transactionData, true) . PHP_EOL, LOCK_EX | FILE_APPEND);
 
 } else {
 
     // Invalid IPN
     $errors = $listener->getErrors();
+
+//	NOTICE webserver must be able to write to ipn_errors.log
     file_put_contents('ipn_errors.log', print_r($errors, true) . PHP_EOL, LOCK_EX | FILE_APPEND);
 
 }
