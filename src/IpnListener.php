@@ -1,9 +1,4 @@
 <?php
-
-namespace wadeshuler\paypalipn;
-
-use Exception;
-
 /**
  *  PayPal IPN Listener
  *
@@ -22,6 +17,11 @@ use Exception;
  *  @license    http://choosealicense.com/licenses/gpl-2.0/
  *  @version    2.5.0
  */
+
+namespace WadeShuler\PhpPaypalIpn;
+
+use Exception;
+
 class IpnListener
 {
 
@@ -264,7 +264,9 @@ class IpnListener
         $r .= "\n";
 
         foreach ($this->post_data as $key => $value) {
-            $r .= str_pad($key, 25)."$value\n";
+            $param = explode("=", $value);
+            $r .= str_pad(urldecode($param[0]), 25).urldecode($param[1])."\n";
+//            $r .= str_pad($key, 25)."$value\n";
         }
         $r .= "\n\n";
 
